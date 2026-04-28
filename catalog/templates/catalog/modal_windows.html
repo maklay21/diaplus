@@ -1,0 +1,102 @@
+<!-- Модальное окно добавления производителя -->
+<div class="modal fade" id="addManufacturerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="{% url 'add_manufacturer' %}">
+                {% csrf_token %}
+                <div class="modal-header" style="background: #e3f2fd;">
+                    <h5 class="modal-title" style="color: #000;">
+                        <i class="bi bi-building" style="color: #0d6efd;"></i> Добавить производителя
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold" style="color: #000;">Наименование</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold" style="color: #000;">Страна</label>
+                        <input type="text" name="country" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn text-white" style="background: #0d6efd;">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно добавления вида товара -->
+<div class="modal fade" id="addProductTypeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="{% url 'add_product_type' %}">
+                {% csrf_token %}
+                <div class="modal-header" style="background: #e3f2fd;">
+                    <h5 class="modal-title" style="color: #000;">
+                        <i class="bi bi-tag" style="color: #0d6efd;"></i> Добавить вид товара
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold" style="color: #000;">Название</label>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn text-white" style="background: #0d6efd;">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if product.image %}
+    <!-- Модальное окно для увеличенного фото -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content" style="background: transparent; border: none; position: relative;">
+                <!-- Кнопка закрыть сверху справа (иконка) -->
+                <button type="button" class="btn" data-bs-dismiss="modal"
+                        style="position: absolute; top: -45px; right: -10px; z-index: 1; background: rgba(0,0,0,0.6); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+                <div class="modal-body p-0 text-center">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                         style="max-width: 100%; max-height: 90vh; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<!-- Модальное окно подтверждения удаления -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Подтверждение удаления
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Вы действительно хотите удалить этот товар?</p>
+                <div class="alert alert-warning">
+                    <strong id="delete-product-name"></strong><br>
+                    <small class="text-muted" id="delete-manufacturer-name"></small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-btn">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>

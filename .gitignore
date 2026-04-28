@@ -1,0 +1,10 @@
+.env
+.venv/
+.idea/
+venv/
+logs/
+media/
+staticfiles/
+catalog/__pycache__
+catalog/migrations/
+diaplus/__pycache__

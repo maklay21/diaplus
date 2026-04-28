@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Каталог продукции{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4" style="color: #1a237e;">Каталог продукции</h2>
+    <div class="row">
+        <!-- Панель фильтров -->
+        <div class="col-md-3">
+            <div class="card shadow-sm" style="border: 1px solid #e3f2fd;">
+                <div class="card-header" style="background: #e3f2fd;">
+                    <h5 class="mb-0"><i class="bi bi-funnel"></i> Фильтры</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get" id="filter-form">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Производитель</label>
+                            <select name="manufacturer" class="form-select" id="manufacturer-filter">
+                                <option value="">Все производители</option>
+                                {% for manufacturer in manufacturers %}
+                                    <option value="{{ manufacturer.id }}"
+                                        {% if selected_manufacturer == manufacturer.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ manufacturer.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Вид товара</label>
+                            <select name="product_type" class="form-select" id="type-filter">
+                                <option value="">Все виды</option>
+                                {% for type in product_types %}
+                                    <option value="{{ type.id }}"
+                                        {% if selected_type == type.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ type.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn w-100 text-white" style="background: #1a237e;">
+                            Применить фильтры
+                        </button>
+                        <button type="button" id="reset-filters-btn" class="btn w-100 mt-2 btn-outline-primary">
+                            Сбросить фильтры
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Таблица товаров -->
+        <div class="col-md-9">
+            <!-- Поиск -->
+            <div class="card shadow-sm mb-3" style="border: 1px solid #e3f2fd;">
+                <div class="card-body">
+                    <form method="get" id="search-form" class="row g-3">
+                        <div class="col-10 col-sm-11 col-md-11">
+                            <div class="position-relative">
+                                <input type="text" name="search" class="form-control pe-4" placeholder="Поиск" value="{{ search_query }}" id="search-input">
+                                <span id="clear-search-btn" class="position-absolute top-50 end-0 translate-middle-y me-2 text-decoration-none" style="color: #6c757d; cursor: pointer; z-index: 10; {% if not search_query %}display: none;{% endif %}">
+                                    <i class="bi bi-x-circle"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <button type="submit" class="btn text-white w-80 text-center" style="background: #1a237e;">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Контейнер для таблицы -->
+            <div id="products-table-container">
+                {% include 'catalog/products_table.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

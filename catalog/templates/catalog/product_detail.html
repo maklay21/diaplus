@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'product_list' %}" style="color: #1a237e;">Каталог</a></li>
+            <li class="breadcrumb-item active">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow-lg" style="border: 1px solid #e3f2fd;">
+        <div class="card-body p-4">
+
+            <!-- Верхняя часть: картинка слева, название и цена справа -->
+            <div class="row mb-4">
+                <!-- Левая колонка - картинка -->
+                <div class="col-md-5">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="img-fluid rounded product-image" alt="{{ product.name }}"
+                             style="width: 100%; max-height: 350px; object-fit: contain; background: #f8f9fa; padding: 10px; cursor: pointer; transition: transform 0.3s ease;"
+                             data-bs-toggle="modal" data-bs-target="#imageModal">
+                    {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center rounded"
+                             style="height: 350px; background: #e3f2fd !important;">
+                            <i class="bi bi-image" style="font-size: 5rem; color: #1a237e;"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Правая колонка - название и цена -->
+                <div class="col-md-7">
+                    <div class="mb-3">
+                        <span class="badge" style="background: #e3f2fd; color: #1a237e; padding: 8px 16px; font-size: 1rem;">
+                            {{ product.product_type.name }}
+                        </span>
+                    </div>
+
+                    <h1 class="mb-3" style="color: #1a237e; font-weight: 700;">
+                        {{ product.name }}
+                    </h1>
+
+                    <p class="mb-3" style="font-size: 1.1rem;">
+                        <i class="bi bi-building"></i>
+                        Производитель: <strong>{{ product.manufacturer.name }}</strong>
+                        {% if product.manufacturer.country %}
+                            <span class="text-muted">({{ product.manufacturer.country }})</span>
+                        {% endif %}
+                    </p>
+
+                    <div class="mt-4">
+                        <div style="font-size: 1.5rem; color: #6c757d; margin-bottom: 5px;">Цена:</div>
+                        <div style="font-size: 1.5rem; font-weight: 500; color: #1a237e; line-height: 1.2;">
+                            по запросу
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Нижняя часть - описание на всю ширину -->
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div style="background: #f8f9fa; border-left: 4px solid #1a237e; padding: 20px; border-radius: 8px;">
+                        <h3 class="mb-3" style="color: #1a237e; font-weight: 600;">
+                            <i class="bi bi-file-text"></i> Описание товара
+                        </h3>
+                        <div class="product-description">
+                            {{ product.description|linebreaks }}
+                        </div>
+
+                        <hr class="my-2">
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка возврата -->
+            <div class="text-center mt-4">
+                <a href="{% url 'product_list' %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i> Вернуться в каталог
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% if product.image %}
+    <!-- Модальное окно -->
+    {% include 'catalog/modal_windows.html' %}
+
+{% endif %}
+
+{% endblock %}

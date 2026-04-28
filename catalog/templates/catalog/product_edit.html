@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}Редактирование товара{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg" style="border: 1px solid #e3f2fd;">
+                <div class="card-header" style="background: #e3f2fd;">
+                    <h3 class="mb-0" style="color: #000;">
+                        <i class="bi bi-pencil-square me-1" style="color: #1a237e;"></i> Редактирование товара
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <!-- Наименование -->
+                        <div class="mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label fw-bold" style="color: #000;">
+                                {{ form.name.label }}
+                            </label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger small mt-1">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Производитель -->
+                        <div class="mb-3">
+                            <label for="{{ form.manufacturer.id_for_label }}" class="form-label fw-bold" style="color: #000;">
+                                {{ form.manufacturer.label }}
+                            </label>
+                            <div class="d-flex gap-2">
+                                {{ form.manufacturer }}
+                                <button type="button" class="btn" style="background: #1a237e; color: white; white-space: nowrap;"
+                                        data-bs-toggle="modal" data-bs-target="#addManufacturerModal">
+                                    <i class="bi bi-plus-lg"></i> Добавить
+                                </button>
+                            </div>
+                            {% if form.manufacturer.errors %}
+                                <div class="text-danger small mt-1">{{ form.manufacturer.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Вид товара -->
+                        <div class="mb-3">
+                            <label for="{{ form.product_type.id_for_label }}" class="form-label fw-bold" style="color: #000;">
+                                {{ form.product_type.label }}
+                            </label>
+                            <div class="d-flex gap-2">
+                                {{ form.product_type }}
+                                <button type="button" class="btn" style="background: #1a237e; color: white; white-space: nowrap;"
+                                        data-bs-toggle="modal" data-bs-target="#addProductTypeModal">
+                                    <i class="bi bi-plus-lg"></i> Добавить
+                                </button>
+                            </div>
+                            {% if form.product_type.errors %}
+                                <div class="text-danger small mt-1">{{ form.product_type.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Описание -->
+                        <div class="mb-3">
+                            <label for="{{ form.description.id_for_label }}" class="form-label fw-bold" style="color: #000;">
+                                {{ form.description.label }}
+                            </label>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger small mt-1">{{ form.description.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Текущее фото -->
+                        {% if form.instance.image %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" style="color: #000;">Текущее фото</label>
+                            <div>
+                                <img src="{{ form.instance.image.url }}" alt="{{ form.instance.name }}"
+                                     style="max-width: 200px; border-radius: 8px;" data-bs-toggle="modal" data-bs-target="#imageModal">
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Фото -->
+                        <div class="mb-3">
+                            <label for="{{ form.image.id_for_label }}" class="form-label fw-bold" style="color: #000;">
+                                {{ form.image.label }}
+                            </label>
+                            {{ form.image }}
+                            <small class="text-muted d-block">Поддерживаются форматы: JPG, PNG</small>
+                            {% if form.image.errors %}
+                                <div class="text-danger small mt-1">{{ form.image.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <hr>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn text-white" style="background: #1a237e;">
+                                <i class="bi bi-save"></i> Сохранить изменения
+                            </button>
+                            <a href="{% url 'product_list' %}" class="btn btn-outline-primary" style="color: #000;">
+                                <i class="bi bi-x-circle"></i> Отмена
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальные окна -->
+{% include 'catalog/modal_windows.html' %}
+
+{% endblock %}
