@@ -30,8 +30,8 @@ class CustomErrorMiddleware:
 
         if response.status_code in (404, 405):
             return render(request, 'pages/404.html', status=404)
-        #elif response.status_code >= 500:
-         #   context = {'error_code': response.status_code}
-          #  return render(request, 'pages/5xx.html', context, status=response.status_code)
+        elif response.status_code >= 500:
+            context = {'error_code': response.status_code}
+            return render(request, 'pages/5xx.html', context, status=response.status_code)
 
         return response
