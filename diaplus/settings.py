@@ -9,19 +9,29 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+<<<<<<< HEAD
 DEBUG = False
 
 ALLOWED_HOSTS = [
     '83.217.202.171',
+=======
+DEBUG = True
+
+ALLOWED_HOSTS = [
+>>>>>>> 5c59ee4 (Remake about.html)
     'localhost',
     '127.0.0.1',
 ]
 
+<<<<<<< HEAD
 CSRF_TRUSTED_ORIGINS = [
     'http://83.217.202.171'
 ]
 
 #SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+=======
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+>>>>>>> 5c59ee4 (Remake about.html)
 AXES_IPWARE_PROXY_COUNT = 1
 AXES_IPWARE_META_PRECEDENCE_ORDER = [
     'HTTP_X_REAL_IP',
@@ -120,6 +130,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
+# Статические файлы
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = []

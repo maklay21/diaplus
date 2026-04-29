@@ -485,3 +485,16 @@ img:hover {
 .modal.show .modal-dialog {
     transform: scale(1);
 }
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Добавляем плавность для ссылок или иконок */
+.bi-check-circle-fill, .bi-dot {
+    transition: transform 0.2s ease;
+}
+
+li:hover .bi-check-circle-fill {
+    transform: scale(1.05);
+}

@@ -16,4 +16,8 @@ echo "Collecting static files..."
 python3 manage.py collectstatic --noinput
 
 echo "Starting Gunicorn server..."
+<<<<<<< HEAD
 gunicorn diaplus.wsgi:application --bind 0.0.0.0:8000 --workers 1
+=======
+gunicorn diaplus.wsgi:application --bind 0.0.0.0:8000 --workers 1
+>>>>>>> 5c59ee4 (Remake about.html)
