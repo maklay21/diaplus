@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from django.shortcuts import render
 
 
@@ -7,7 +6,7 @@ class AdminProtectionMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if not request.user.is_authenticated and not request.user.is_staff:
+        if not request.user.is_staff:
             if request.path.startswith((
                 '/admin/',
                 '/product/add/',
@@ -28,10 +27,21 @@ class CustomErrorMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
 
-        if response.status_code in (404, 405):
+        if response.status_code in (403, 404, 405):
             return render(request, 'pages/404.html', status=404)
         elif response.status_code >= 500:
             context = {'error_code': response.status_code}
             return render(request, 'pages/5xx.html', context, status=response.status_code)
 
         return response
+
+
+class RealIPMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        real_ip = request.META.get('HTTP_X_REAL_IP')
+        if real_ip:
+            request.META['REMOTE_ADDR'] = real_ip
+        return self.get_response(request)

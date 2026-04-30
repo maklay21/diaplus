@@ -339,6 +339,11 @@ strong, b {
         padding: 40px 25px !important;
     }
 
+    /* Увеличиваем блок с картой на телефонах */
+    .hero-section iframe {
+        height: 350px;
+    }
+
     .bi-building {
         font-size: 40px !important;
     }

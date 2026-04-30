@@ -23,7 +23,7 @@ class LoginView(View):
 
     template_name = 'auth/login.html'
     form_class = LoginForm
-    success_url = reverse_lazy('product_list')
+    success_url = reverse_lazy('home')
 
     def dispatch(self, request, *args, **kwargs):
 

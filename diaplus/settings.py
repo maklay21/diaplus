@@ -12,29 +12,20 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
+    'diaplys.ru',
+    'www.diaplys.ru',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'localhost',
-    '127.0.0.1',
+    'https://diaplys.ru',
+    'https://www.diaplys.ru'
 ]
 
-# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-
-AXES_IPWARE_PROXY_COUNT = 1
-AXES_IPWARE_META_PRECEDENCE_ORDER = [
-    'HTTP_X_REAL_IP',
-    'HTTP_X_FORWARDED_FOR',
-    'REMOTE_ADDR',
-]
-AXES_ENABLED = True
-AXES_FAILURE_LIMIT = 5
-AXES_COOLOFF_TIME = 1
-AXES_LOCKOUT_PARAMETERS = ['ip_address']
-AXES_ENABLE_ADMIN = True
-AXES_RESET_ON_SUCCESS = True
+CSRF_COOKIE_SECURE = True      # Передавать CSRF-токен только по HTTPS
+SESSION_COOKIE_SECURE = True   # Передавать session cookie только по HTTPS
+SECURE_SSL_REDIRECT = True     # Редирект с HTTP на HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -56,9 +47,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'axes.middleware.AxesMiddleware',
     'catalog.middleware.AdminProtectionMiddleware',
     'catalog.middleware.CustomErrorMiddleware',
+    'catalog.middleware.RealIPMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -120,6 +112,21 @@ USE_TZ = True
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+AXES_USE_X_FORWARDED_FOR = True
+AXES_BEHIND_REVERSE_PROXY = True
+AXES_IPWARE_PROXY_COUNT = 1
+AXES_IPWARE_META_PRECEDENCE_ORDER = [
+    'HTTP_X_REAL_IP',
+    'HTTP_X_FORWARDED_FOR',
+    'REMOTE_ADDR',
+]
+AXES_ENABLED = True
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1
+AXES_LOCKOUT_PARAMETERS = ['ip_address']
+AXES_ENABLE_ADMIN = True
+AXES_RESET_ON_SUCCESS = True
 
 # Статические файлы
 STATIC_URL = '/static/'

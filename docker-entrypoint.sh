@@ -17,4 +17,4 @@ python3 manage.py collectstatic --noinput
 
 echo "Starting Gunicorn server..."
 
-gunicorn diaplus.wsgi:application --bind 0.0.0.0:8000 --workers 1
+gunicorn diaplus.wsgi:application --workers 2 --bind 0.0.0.0:8000 --max-requests 1000 --max-requests-jitter 200

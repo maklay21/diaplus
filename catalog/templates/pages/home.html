@@ -1,37 +1,76 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Диаплюс - поставщик медицинских товаров{% endblock %}
+{% block title %}Диаплюс - поставщик высококачественного медицинского оборудования{% endblock %}
 
 {% block content %}
 
-<div class="container mt-4">
-    <div class="hero-section" style="background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%); border-radius: 20px; padding: 60px 50px;">
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="hero-section" style="background: linear-gradient(135deg, #e8f4ff 0%, #ffffff 100%); border-radius: 32px; padding: 50px 45px; box-shadow: 0 12px 40px rgba(0,0,0,0.05);">
         <div class="row align-items-center">
-            <div class="col-md-8">
-                <div class="d-flex align-items-center">
-                    <i style="font-size: 60px; color: #1a237e; margin-right: 5px;"></i>
-                    <h1 class="mb-4" style="color: #1a237e;">ООО «Диаплюс»</h1>
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h1 style="color: #1a237e; font-size: 2.8rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 0;">
+                        ООО «Диаплюс»
+                    </h1>
+                    <div style="width: 70px; height: 3px; background: linear-gradient(90deg, #1a237e, #64b5f6); margin-top: 12px;"></div>
                 </div>
-                <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 25px; margin-bottom: 0;" class="lead";>
-                    Наша компания — надежный поставщик высококачественного оборудования для клинико-диагностических и экспертных лабораторий.
-                    Работая на рынке с 2000 года, мы зарекомендовали себя как ответственный партнер, гарантирующий отличное качество продукции.
-                    Наша цель — сделать лучшие товары доступными по оптимальным ценам
+
+                <p style="font-size: 1.1rem; line-height: 1.7; color: #2c3e50; text-align: justify;">
+                    <span style="font-weight: 600; color: #1a237e;">Надёжный поставщик</span> высококачественного оборудования
+                    для клинико-диагностических и экспертных лабораторий. Работая на рынке с 2000 года,
+                    мы зарекомендовали себя как ответственный партнёр, гарантирующий исключительное качество продукции.
+                    Наша цель — сделать лучшие товары доступными по оптимальным ценам.
                 </p>
 
-                <h4 class="mt-4 mb-4" style="color: #1a237e;">
-                    <i class="bi bi-patch-check-fill me-2" style="font-size: 1.2rem;"></i>
-                        Наши преимущества
-                </h4>
-                <ul class="list-unstyled">
-                    <li class="mb-3"><i class="bi bi-check-circle me-2" style="color: #1a237e;"></i> Широкий ассортимент продукции</li>
-                    <li class="mb-3"><i class="bi bi-check-circle me-2" style="color: #1a237e;"></i> Прямые поставки от производителей</li>
-                    <li class="mb-3"><i class="bi bi-check-circle me-2" style="color: #1a237e;"></i> Гарантия качества</li>
-                    <li class="mb-3"><i class="bi bi-check-circle me-2" style="color: #1a237e;"></i> Профессиональная консультация</li>
-                </ul>
+                <!-- Преимущества -->
+                <div class="mt-4">
+                    <h4 class="mt-4 mb-4" style="color: #1a237e;">
+                        <i class="bi bi-patch-check-fill me-2" style="font-size: 1.2rem;"></i>
+                            Наши преимущества
+                    </h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle" style="background: #e8f0fe; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="bi bi-check-lg" style="color: #1a237e; font-size: 1.2rem;"></i>
+                                </div>
+                                <span style="color: #2c3e50;">Широкий ассортимент</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle" style="background: #e8f0fe; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="bi bi-check-lg" style="color: #1a237e; font-size: 1.2rem;"></i>
+                                </div>
+                                <span style="color: #2c3e50;">Прямые поставки</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle" style="background: #e8f0fe; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="bi bi-check-lg" style="color: #1a237e; font-size: 1.2rem;"></i>
+                                </div>
+                                <span style="color: #2c3e50;">Гарантия качества</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle" style="background: #e8f0fe; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+                                    <i class="bi bi-check-lg" style="color: #1a237e; font-size: 1.2rem;"></i>
+                                </div>
+                                <span style="color: #2c3e50;">Проф. консультации</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4 text-md-end text-center mt-4 mt-md-0">
-                <a href="{% url 'product_list' %}" class="btn" style="background: #1a237e; color: white; padding: 14px 35px; font-size: 1.1rem; border-radius: 50px;">
-                    <i class="bi bi-grid me-2"></i>Наша продукция
+
+            <!-- Кнопка справа -->
+            <div class="col-lg-4 text-center text-lg-end mt-5 mt-lg-0">
+                <a href="{% url 'product_list' %}" class="btn" style="background: linear-gradient(135deg, #1a237e, #0d47a1); color: white; padding: 14px 40px; font-size: 1.1rem; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(26,115,232,0.3);">
+                    <i class="bi bi-grid-3x3-gap-fill me-2"></i>Наша продукция
                     <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
